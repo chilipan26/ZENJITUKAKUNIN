@@ -46,17 +46,9 @@
       text-transform: uppercase;
       margin-bottom: 4px;
     }
-    .header-title {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: .03em;
-    }
+    .header-title { font-size: 22px; font-weight: 700; letter-spacing: .03em; }
 
-    main {
-      padding: 20px 16px 48px;
-      max-width: 520px;
-      margin: 0 auto;
-    }
+    main { padding: 20px 16px 48px; max-width: 520px; margin: 0 auto; }
 
     .card {
       background: var(--surface);
@@ -66,114 +58,67 @@
       margin-bottom: 14px;
     }
     .card-title {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 18px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
     }
 
     .field { margin-bottom: 20px; }
     .field:last-child { margin-bottom: 0; }
 
     label {
-      display: block;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink-sub);
-      margin-bottom: 8px;
-      letter-spacing: .02em;
+      display: block; font-size: 15px; font-weight: 600;
+      color: var(--ink-sub); margin-bottom: 8px; letter-spacing: .02em;
     }
     label .req { color: var(--ng); margin-left: 3px; }
 
     input[type="date"],
     input[type="time"],
     input[type="text"] {
-      width: 100%;
-      padding: 16px 14px;
-      border: 1.5px solid var(--line);
-      border-radius: 10px;
-      font-size: 18px;
-      font-family: inherit;
-      color: var(--ink);
-      background: var(--surface);
-      appearance: none;
-      -webkit-appearance: none;
-      transition: border-color .15s;
-      outline: none;
+      width: 100%; padding: 16px 14px;
+      border: 1.5px solid var(--line); border-radius: 10px;
+      font-size: 18px; font-family: inherit; color: var(--ink);
+      background: var(--surface); appearance: none; -webkit-appearance: none;
+      transition: border-color .15s; outline: none;
     }
     input:focus { border-color: var(--accent); }
     input::placeholder { color: #b0b0c8; }
 
-    .time-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .time-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
     .radio-group { display: flex; gap: 10px; }
     .radio-btn { flex: 1; position: relative; }
-    .radio-btn input {
-      position: absolute; opacity: 0; width: 0; height: 0;
-    }
+    .radio-btn input { position: absolute; opacity: 0; width: 0; height: 0; }
     .radio-btn label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 6px;
-      border: 1.5px solid var(--line);
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--ink-sub);
-      cursor: pointer;
-      transition: all .15s;
-      margin: 0;
-      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      padding: 15px 6px; border: 1.5px solid var(--line); border-radius: 10px;
+      font-size: 16px; font-weight: 600; color: var(--ink-sub);
+      cursor: pointer; transition: all .15s; margin: 0; background: var(--surface);
     }
     .radio-btn input:checked + label {
-      border-color: var(--accent);
-      background: #eef1ff;
-      color: var(--accent);
+      border-color: var(--accent); background: #eef1ff; color: var(--accent);
     }
 
     .cond-field { display: none; margin-top: 16px; }
     .cond-field.visible { display: block; }
 
-    .field-error {
-      font-size: 13px; color: var(--ng);
-      margin-top: 6px; display: none;
-    }
+    .field-error { font-size: 13px; color: var(--ng); margin-top: 6px; display: none; }
     .field-error.visible { display: block; }
     input.has-error { border-color: var(--ng); }
 
     #globalError {
-      display: none;
-      background: #fff0f1;
-      border: 1.5px solid var(--ng);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 15px;
-      color: var(--ng);
-      font-weight: 600;
-      margin-bottom: 14px;
+      display: none; background: #fff0f1;
+      border: 1.5px solid var(--ng); border-radius: 10px;
+      padding: 14px 16px; font-size: 15px;
+      color: var(--ng); font-weight: 600; margin-bottom: 14px;
     }
     #globalError.visible { display: block; }
 
     .submit-wrap { margin-top: 6px; }
     #submitBtn {
-      width: 100%;
-      padding: 20px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 19px;
-      font-weight: 700;
-      font-family: inherit;
-      letter-spacing: .05em;
-      cursor: pointer;
+      width: 100%; padding: 20px; background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius); font-size: 19px; font-weight: 700;
+      font-family: inherit; letter-spacing: .05em; cursor: pointer;
       transition: background .15s, opacity .15s;
       box-shadow: 0 4px 18px rgba(67,97,238,.30);
     }
@@ -181,50 +126,30 @@
     #submitBtn:disabled { opacity: .55; cursor: not-allowed; }
 
     #successScreen {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 70vh;
-      text-align: center;
-      padding: 32px 24px;
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 70vh;
+      text-align: center; padding: 32px 24px;
     }
     #successScreen.visible { display: flex; }
     .success-icon {
-      width: 88px; height: 88px;
-      background: var(--ok);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
+      width: 88px; height: 88px; background: var(--ok);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; margin-bottom: 28px;
     }
     .success-icon svg { width: 44px; height: 44px; }
-    .success-title {
-      font-size: 24px; font-weight: 700;
-      color: var(--ink); margin-bottom: 12px;
-    }
-    .success-sub {
-      font-size: 16px; color: var(--ink-sub); line-height: 1.8;
-    }
+    .success-title { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+    .success-sub { font-size: 16px; color: var(--ink-sub); line-height: 1.8; }
 
     #loadingScreen {
-      position: fixed; inset: 0;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      flex-direction: column;
-      gap: 16px;
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; flex-direction: column; gap: 16px;
     }
     #loadingScreen.hidden { display: none; }
     .spinner {
       width: 36px; height: 36px;
-      border: 3px solid var(--line);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
+      border: 3px solid var(--line); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text { font-size: 15px; color: var(--ink-sub); }
@@ -336,12 +261,9 @@
 </div>
 
 <script>
-// ============================================================
-// ★ここを書き換えてください★
-// ============================================================
+// ★ LIFFアプリIDをここに入力
 const LIFF_ID = '2010311386-sSwMJRkO';
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzcSP43HYhGy1nM_dsg4BGB1Mxtq5eQO5DUCNTQter6aCvQl30NZZLDKIboeohXUBPn6w/exec';
-// ============================================================
 
 let lineUserId  = '';
 let displayName = '';
@@ -361,16 +283,15 @@ const globalError   = $('globalError');
     const profile = await liff.getProfile();
     lineUserId  = profile.userId;
     displayName = profile.displayName;
-  } catch (e) {
+  } catch(e) {
     console.error('LIFF init error:', e);
     lineUserId  = 'debug_user';
     displayName = 'デバッグユーザー';
-  } finally {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    $('workDate').value = tomorrow.toISOString().slice(0, 10);
-    loadingScreen.classList.add('hidden');
   }
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  $('workDate').value = tomorrow.toISOString().slice(0, 10);
+  loadingScreen.classList.add('hidden');
 })();
 
 document.querySelectorAll('input[name="transportType"]').forEach(r => {
@@ -379,15 +300,10 @@ document.querySelectorAll('input[name="transportType"]').forEach(r => {
 
 function updateCondFields() {
   const val = getTransportType();
-  const condTrain     = $('cond-train');
-  const condPickTime  = $('cond-pick-time');
-  const condPickPlace = $('cond-pickupPlace');
-
-  condTrain.classList.toggle('visible', val === '電車');
+  $('cond-train').classList.toggle('visible', val === '電車');
   if (val !== '電車') $('transportTime').value = '';
-
-  condPickTime.classList.toggle('visible', val === 'ピック');
-  condPickPlace.classList.toggle('visible', val === 'ピック');
+  $('cond-pick-time').classList.toggle('visible', val === 'ピック');
+  $('cond-pickupPlace').classList.toggle('visible', val === 'ピック');
   if (val !== 'ピック') {
     $('transportTimePick').value = '';
     $('pickupPlace').value = '';
@@ -401,7 +317,7 @@ function getTransportType() {
 
 function getTransportTime() {
   const val = getTransportType();
-  if (val === '電車')  return $('transportTime').value || '';
+  if (val === '電車')   return $('transportTime').value || '';
   if (val === 'ピック') return $('transportTimePick').value || '';
   return '';
 }
@@ -454,23 +370,30 @@ submitBtn.addEventListener('click', async () => {
   };
 
   try {
+    // text/plainでpreflightなしCORS回避
     const res = await fetch(GAS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      method:   'POST',
+      redirect: 'follow',
+      headers:  { 'Content-Type': 'text/plain;charset=utf-8' },
+      body:     JSON.stringify(payload),
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    // no-corsではないのでレスポンス確認可能
     formWrap.style.display = 'none';
     successScreen.classList.add('visible');
-  } catch (err) {
-    globalError.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
-    globalError.classList.add('visible');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    isSubmitting = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = '前日確認を送信';
+  } catch(err) {
+    console.error(err);
+    showError('送信に失敗しました。再度お試しください。');
   }
 });
+
+function showError(msg) {
+  globalError.textContent = msg;
+  globalError.classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  isSubmitting = false;
+  submitBtn.disabled = false;
+  submitBtn.textContent = '前日確認を送信';
+}
 </script>
 </body>
 </html>
