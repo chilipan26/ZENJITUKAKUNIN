@@ -6,7 +6,6 @@
   <title>前日確認</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -27,82 +26,75 @@
       background: var(--bg);
       color: var(--ink);
       font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-      font-size: 16px;
+      font-size: 18px;
       min-height: 100vh;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* ===== HEADER ===== */
     .header {
       background: var(--accent);
       color: #fff;
-      padding: 20px 20px 18px;
+      padding: 22px 20px 20px;
       position: sticky;
       top: 0;
       z-index: 10;
     }
     .header-label {
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: .12em;
       opacity: .75;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
     .header-title {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: .03em;
     }
 
-    /* ===== MAIN ===== */
     main {
       padding: 20px 16px 48px;
       max-width: 520px;
       margin: 0 auto;
     }
 
-    /* ===== CARD ===== */
     .card {
       background: var(--surface);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px 18px;
+      padding: 22px 18px;
       margin-bottom: 14px;
     }
     .card-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
-    /* ===== FIELD ===== */
-    .field { margin-bottom: 18px; }
+    .field { margin-bottom: 20px; }
     .field:last-child { margin-bottom: 0; }
 
     label {
       display: block;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--ink-sub);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       letter-spacing: .02em;
     }
-    label .req {
-      color: var(--ng);
-      margin-left: 3px;
-    }
+    label .req { color: var(--ng); margin-left: 3px; }
 
     input[type="date"],
     input[type="time"],
     input[type="text"] {
       width: 100%;
-      padding: 14px 14px;
+      padding: 16px 14px;
       border: 1.5px solid var(--line);
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 18px;
       font-family: inherit;
       color: var(--ink);
       background: var(--surface);
@@ -111,47 +103,33 @@
       transition: border-color .15s;
       outline: none;
     }
-    input:focus {
-      border-color: var(--accent);
-    }
+    input:focus { border-color: var(--accent); }
     input::placeholder { color: #b0b0c8; }
 
-    /* ===== TIME ROW ===== */
     .time-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
 
-    /* ===== RADIO ===== */
-    .radio-group {
-      display: flex;
-      gap: 10px;
-    }
-    .radio-btn {
-      flex: 1;
-      position: relative;
-    }
+    .radio-group { display: flex; gap: 10px; }
+    .radio-btn { flex: 1; position: relative; }
     .radio-btn input {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
+      position: absolute; opacity: 0; width: 0; height: 0;
     }
     .radio-btn label {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 13px 6px;
+      padding: 15px 6px;
       border: 1.5px solid var(--line);
       border-radius: 10px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       color: var(--ink-sub);
       cursor: pointer;
       transition: all .15s;
       margin: 0;
-      letter-spacing: .03em;
       background: var(--surface);
     }
     .radio-btn input:checked + label {
@@ -160,49 +138,38 @@
       color: var(--accent);
     }
 
-    /* ===== CONDITIONAL FIELDS ===== */
-    .cond-field {
-      display: none;
-      margin-top: 14px;
-    }
+    .cond-field { display: none; margin-top: 16px; }
     .cond-field.visible { display: block; }
 
-    /* ===== ERROR ===== */
     .field-error {
-      font-size: 12px;
-      color: var(--ng);
-      margin-top: 5px;
-      display: none;
+      font-size: 13px; color: var(--ng);
+      margin-top: 6px; display: none;
     }
     .field-error.visible { display: block; }
-    input.has-error {
-      border-color: var(--ng);
-    }
+    input.has-error { border-color: var(--ng); }
 
-    /* ===== GLOBAL ERROR ===== */
     #globalError {
       display: none;
       background: #fff0f1;
       border: 1.5px solid var(--ng);
       border-radius: 10px;
       padding: 14px 16px;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--ng);
       font-weight: 600;
       margin-bottom: 14px;
     }
     #globalError.visible { display: block; }
 
-    /* ===== SUBMIT ===== */
     .submit-wrap { margin-top: 6px; }
     #submitBtn {
       width: 100%;
-      padding: 18px;
+      padding: 20px;
       background: var(--accent);
       color: #fff;
       border: none;
       border-radius: var(--radius);
-      font-size: 17px;
+      font-size: 19px;
       font-weight: 700;
       font-family: inherit;
       letter-spacing: .05em;
@@ -211,12 +178,8 @@
       box-shadow: 0 4px 18px rgba(67,97,238,.30);
     }
     #submitBtn:active { background: var(--accent-dk); }
-    #submitBtn:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
+    #submitBtn:disabled { opacity: .55; cursor: not-allowed; }
 
-    /* ===== SUCCESS ===== */
     #successScreen {
       display: none;
       flex-direction: column;
@@ -228,32 +191,25 @@
     }
     #successScreen.visible { display: flex; }
     .success-icon {
-      width: 80px;
-      height: 80px;
+      width: 88px; height: 88px;
       background: var(--ok);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
-    .success-icon svg { width: 40px; height: 40px; }
+    .success-icon svg { width: 44px; height: 44px; }
     .success-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 10px;
+      font-size: 24px; font-weight: 700;
+      color: var(--ink); margin-bottom: 12px;
     }
     .success-sub {
-      font-size: 14px;
-      color: var(--ink-sub);
-      line-height: 1.7;
+      font-size: 16px; color: var(--ink-sub); line-height: 1.8;
     }
 
-    /* ===== LOADING ===== */
     #loadingScreen {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: var(--bg);
       display: flex;
       align-items: center;
@@ -264,26 +220,23 @@
     }
     #loadingScreen.hidden { display: none; }
     .spinner {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border: 3px solid var(--line);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin .7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text { font-size: 13px; color: var(--ink-sub); }
+    .loading-text { font-size: 15px; color: var(--ink-sub); }
   </style>
 </head>
 <body>
 
-<!-- ローディング -->
 <div id="loadingScreen">
   <div class="spinner"></div>
   <div class="loading-text">読み込み中…</div>
 </div>
 
-<!-- 成功画面 -->
 <div id="successScreen">
   <div class="success-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -294,7 +247,6 @@
   <div class="success-sub">前日確認の送信が完了しました。<br>明日もよろしくお願いします！</div>
 </div>
 
-<!-- メインフォーム -->
 <div id="formWrap">
   <header class="header">
     <div class="header-label">Event Staff</div>
@@ -304,16 +256,13 @@
   <main>
     <div id="globalError">入力に不備があります。確認してください。</div>
 
-    <!-- 勤務情報 -->
     <div class="card">
       <div class="card-title">勤務情報</div>
-
       <div class="field">
         <label for="workDate">勤務日<span class="req">*</span></label>
         <input type="date" id="workDate" required>
         <div class="field-error" id="err-workDate">勤務日を選択してください</div>
       </div>
-
       <div class="field">
         <label for="workPlace">勤務場所<span class="req">*</span></label>
         <input type="text" id="workPlace" placeholder="例）JT梅田 / JTなんば / JT天王寺" required>
@@ -321,28 +270,24 @@
       </div>
     </div>
 
-    <!-- 時間情報 -->
     <div class="card">
       <div class="card-title">出発・到着</div>
-
       <div class="field time-row">
         <div>
-          <label for="departureTime">出発時間<span class="req">*</span></label>
+          <label for="departureTime">自宅出発時間<span class="req">*</span></label>
           <input type="time" id="departureTime" required>
           <div class="field-error" id="err-departureTime">入力してください</div>
         </div>
         <div>
-          <label for="arrivalTime">到着予定<span class="req">*</span></label>
+          <label for="arrivalTime">現場集合場所の到着予定<span class="req">*</span></label>
           <input type="time" id="arrivalTime" required>
           <div class="field-error" id="err-arrivalTime">入力してください</div>
         </div>
       </div>
     </div>
 
-    <!-- 移動情報 -->
     <div class="card">
       <div class="card-title">移動情報</div>
-
       <div class="field">
         <label>移動区分<span class="req">*</span></label>
         <div class="radio-group">
@@ -362,15 +307,20 @@
         <div class="field-error" id="err-transportType">移動区分を選択してください</div>
       </div>
 
-      <!-- 移動時間（電車/ピック時のみ） -->
-      <div class="cond-field" id="cond-transportTime">
+      <div class="cond-field" id="cond-train">
         <div class="field">
-          <label for="transportTime">移動時間</label>
-          <input type="time" id="transportTime" placeholder="00:00">
+          <label for="transportTime">電車出発時間</label>
+          <input type="time" id="transportTime">
         </div>
       </div>
 
-      <!-- ピック場所（ピック時のみ） -->
+      <div class="cond-field" id="cond-pick-time">
+        <div class="field">
+          <label for="transportTimePick">集合時間</label>
+          <input type="time" id="transportTimePick">
+        </div>
+      </div>
+
       <div class="cond-field" id="cond-pickupPlace">
         <div class="field">
           <label for="pickupPlace">ピック場所</label>
@@ -379,7 +329,6 @@
       </div>
     </div>
 
-    <!-- 送信 -->
     <div class="submit-wrap">
       <button id="submitBtn" type="button">前日確認を送信</button>
     </div>
@@ -388,138 +337,97 @@
 
 <script>
 // ============================================================
-// 設定
+// ★ここを書き換えてください★
 // ============================================================
-const LIFF_ID    = 'YOUR_LIFF_ID';           // ← LIFFアプリIDに書き換え
-const GAS_URL    = 'YOUR_GAS_WEB_APP_URL';   // ← GAS WebアプリURLに書き換え
+const LIFF_ID = '2010311386-sSwMJRkO';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwEbFGCJLHQ7ba7LDc57wn9FeVVrDnEcIgkh8ApCMnFiL5XPQWWm3JoHEpgZKi-fVXJ/exec';
+// ============================================================
 
-// ============================================================
-// 状態
-// ============================================================
-let lineUserId   = '';
-let displayName  = '';
+let lineUserId  = '';
+let displayName = '';
 let isSubmitting = false;
 
-// ============================================================
-// DOM
-// ============================================================
 const $ = id => document.getElementById(id);
-const loadingScreen  = $('loadingScreen');
-const successScreen  = $('successScreen');
-const formWrap       = $('formWrap');
-const submitBtn      = $('submitBtn');
-const globalError    = $('globalError');
+const loadingScreen = $('loadingScreen');
+const successScreen = $('successScreen');
+const formWrap      = $('formWrap');
+const submitBtn     = $('submitBtn');
+const globalError   = $('globalError');
 
-// ============================================================
-// LIFF初期化
-// ============================================================
 (async () => {
   try {
     await liff.init({ liffId: LIFF_ID });
-
-    if (!liff.isLoggedIn()) {
-      liff.login();
-      return;
-    }
-
-    const profile  = await liff.getProfile();
-    lineUserId     = profile.userId;
-    displayName    = profile.displayName;
-
-    // デフォルト勤務日：明日
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    $('workDate').value = tomorrow.toISOString().slice(0, 10);
-
+    if (!liff.isLoggedIn()) { liff.login(); return; }
+    const profile = await liff.getProfile();
+    lineUserId  = profile.userId;
+    displayName = profile.displayName;
   } catch (e) {
     console.error('LIFF init error:', e);
-    // LIFF外(ブラウザ確認用)でも動作させる
     lineUserId  = 'debug_user';
     displayName = 'デバッグユーザー';
+  } finally {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     $('workDate').value = tomorrow.toISOString().slice(0, 10);
-  } finally {
     loadingScreen.classList.add('hidden');
   }
 })();
 
-// ============================================================
-// 移動区分 → 条件フィールド表示切替
-// ============================================================
-document.querySelectorAll('input[name="transportType"]').forEach(radio => {
-  radio.addEventListener('change', updateCondFields);
+document.querySelectorAll('input[name="transportType"]').forEach(r => {
+  r.addEventListener('change', updateCondFields);
 });
 
 function updateCondFields() {
   const val = getTransportType();
-  const condTime  = $('cond-transportTime');
-  const condPick  = $('cond-pickupPlace');
+  const condTrain     = $('cond-train');
+  const condPickTime  = $('cond-pick-time');
+  const condPickPlace = $('cond-pickupPlace');
 
-  if (val === '電車' || val === 'ピック') {
-    condTime.classList.add('visible');
-  } else {
-    condTime.classList.remove('visible');
-    $('transportTime').value = '';
-  }
+  condTrain.classList.toggle('visible', val === '電車');
+  if (val !== '電車') $('transportTime').value = '';
 
-  if (val === 'ピック') {
-    condPick.classList.add('visible');
-  } else {
-    condPick.classList.remove('visible');
+  condPickTime.classList.toggle('visible', val === 'ピック');
+  condPickPlace.classList.toggle('visible', val === 'ピック');
+  if (val !== 'ピック') {
+    $('transportTimePick').value = '';
     $('pickupPlace').value = '';
   }
 }
 
 function getTransportType() {
-  const checked = document.querySelector('input[name="transportType"]:checked');
-  return checked ? checked.value : '';
+  const c = document.querySelector('input[name="transportType"]:checked');
+  return c ? c.value : '';
 }
 
-// ============================================================
-// バリデーション
-// ============================================================
+function getTransportTime() {
+  const val = getTransportType();
+  if (val === '電車')  return $('transportTime').value || '';
+  if (val === 'ピック') return $('transportTimePick').value || '';
+  return '';
+}
+
 function validate() {
   let ok = true;
-
-  const rules = [
-    { id: 'workDate',       errId: 'err-workDate',       check: v => v !== '' },
-    { id: 'workPlace',      errId: 'err-workPlace',      check: v => v.trim() !== '' },
-    { id: 'departureTime',  errId: 'err-departureTime',  check: v => v !== '' },
-    { id: 'arrivalTime',    errId: 'err-arrivalTime',    check: v => v !== '' },
-  ];
-
-  rules.forEach(({ id, errId, check }) => {
-    const el  = $(id);
-    const err = $(errId);
-    if (!check(el.value)) {
-      el.classList.add('has-error');
-      err.classList.add('visible');
-      ok = false;
-    } else {
-      el.classList.remove('has-error');
-      err.classList.remove('visible');
-    }
+  [
+    { id: 'workDate',      errId: 'err-workDate',      check: v => v !== '' },
+    { id: 'workPlace',     errId: 'err-workPlace',     check: v => v.trim() !== '' },
+    { id: 'departureTime', errId: 'err-departureTime', check: v => v !== '' },
+    { id: 'arrivalTime',   errId: 'err-arrivalTime',   check: v => v !== '' },
+  ].forEach(({ id, errId, check }) => {
+    const el = $(id), err = $(errId);
+    const pass = check(el.value);
+    el.classList.toggle('has-error', !pass);
+    err.classList.toggle('visible', !pass);
+    if (!pass) ok = false;
   });
-
-  // 移動区分
-  const errTr = $('err-transportType');
-  if (!getTransportType()) {
-    errTr.classList.add('visible');
-    ok = false;
-  } else {
-    errTr.classList.remove('visible');
-  }
-
+  const noTr = !getTransportType();
+  $('err-transportType').classList.toggle('visible', noTr);
+  if (noTr) ok = false;
   return ok;
 }
 
-// ============================================================
-// 送信
-// ============================================================
 submitBtn.addEventListener('click', async () => {
   if (isSubmitting) return;
-
   globalError.classList.remove('visible');
 
   if (!validate()) {
@@ -541,30 +449,24 @@ submitBtn.addEventListener('click', async () => {
     departureTime: $('departureTime').value,
     arrivalTime:   $('arrivalTime').value,
     transportType: getTransportType(),
-    transportTime: $('transportTime').value || '',
+    transportTime: getTransportTime(),
     pickupPlace:   $('pickupPlace').value.trim() || '',
   };
 
   try {
     const res = await fetch(GAS_URL, {
-      method:  'POST',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload),
+      body: JSON.stringify(payload),
     });
-
     if (!res.ok) throw new Error('HTTP ' + res.status);
-
-    // 成功
-    formWrap.style.display    = 'none';
+    formWrap.style.display = 'none';
     successScreen.classList.add('visible');
-
   } catch (err) {
-    console.error('Submit error:', err);
     globalError.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
     globalError.classList.add('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    isSubmitting   = false;
+    isSubmitting = false;
     submitBtn.disabled = false;
     submitBtn.textContent = '前日確認を送信';
   }
