@@ -76,6 +76,16 @@ transition: transform .15s;
 details.acc[open] summary::after { transform: rotate(180deg); }
 .acc-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; }
 
+/* ---- 翌日入力アコーディオン(強調カラー) ---- */
+details.input-acc {
+border: 1.5px solid #3b6fd6;
+background: #eaf1fd;
+}
+details.input-acc summary {
+background: #dbe6fb;
+color: #1d4fae;
+}
+
 /* ---- 日ブロック(当日/翌日 表示エリア) ---- */
 .day-block { display: flex; flex-direction: column; gap: 5px; }
 .day-heading-row {
@@ -241,8 +251,8 @@ border-radius: 50%; animation: spin .7s linear infinite;
 </div>
 
 <!-- ===== 翌日 入力・編集(ログイン直下) ===== -->
-<details class="acc" id="tomorrowInputAcc" open>
-<summary>✨ <span id="tomorrowInputDateLabel">--/--</span> 入力・編集</summary>
+<details class="acc input-acc" id="tomorrowInputAcc">
+<summary>🌟 <span id="tomorrowInputDateLabel">--/--</span> 入力編集はこちら</summary>
 <div class="acc-body">
 <div id="toast">送信しました！</div>
 <div id="globalError">入力に不備があります。確認してください。</div>
@@ -426,6 +436,9 @@ renderSelf('selfTomorrowBody', data.tomorrow.self);
 renderOthers('othersTomorrowBody', data.tomorrow.others);
 
 prefillTomorrowForm(data.tomorrow.self);
+
+// 未入力なら開く、入力済み(編集)なら閉じておく
+$('tomorrowInputAcc').open = !data.tomorrow.self;
 } catch(err) {
 console.error('loadViewエラー', err);
 }
