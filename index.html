@@ -18,7 +18,6 @@
 --accent-dk: #000000;
 --ok:        #2ec4b6;
 --ng:        #e63946;
---warn:      #f4a521;
 --radius:    10px;
 }
 
@@ -26,59 +25,46 @@ html, body {
 background: var(--bg);
 color: var(--ink);
 font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-font-size: 15px;
+font-size: 14px;
 min-height: 100vh;
 -webkit-tap-highlight-color: transparent;
 }
 
-main { padding: 12px 10px 32px; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+main { padding: 10px 8px 28px; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
 
 .login-badge {
 background: var(--surface);
 border: 1px solid var(--line);
 border-radius: 8px;
-padding: 8px 12px;
+padding: 7px 11px;
 display: flex;
 align-items: center;
-gap: 7px;
-font-size: 13px;
+gap: 6px;
+font-size: 12px;
 font-weight: 600;
 color: var(--ink-sub);
 }
 
-/* ---- 日ブロック ---- */
-.day-block { display: flex; flex-direction: column; gap: 6px; }
-.day-heading {
-font-size: 13px; font-weight: 700; color: var(--ink);
-display: flex; align-items: center; gap: 6px;
-padding-left: 2px;
-}
-.day-heading .tag {
-font-size: 11px; font-weight: 700; padding: 2px 7px;
-border-radius: 20px; background: var(--line); color: var(--ink-sub);
-}
-.day-block.tomorrow .day-heading .tag { background: var(--ink); color: #fff; }
-
-/* ---- アコーディオン ---- */
+/* ---- 共通アコーディオン(details) : 翌日入力用 ---- */
 details.acc {
 background: var(--surface);
 border-radius: var(--radius);
 border: 0.5px solid var(--line);
 overflow: hidden;
 }
-details.acc + details.acc { margin-top: 6px; }
 details.acc summary {
 list-style: none;
 cursor: pointer;
 padding: 10px 12px;
 font-size: 12.5px;
 font-weight: 700;
-letter-spacing: .04em;
-color: var(--accent);
+letter-spacing: .03em;
+color: var(--ink);
 display: flex;
 align-items: center;
 justify-content: space-between;
 user-select: none;
+background: var(--bg);
 }
 details.acc summary::-webkit-details-marker { display: none; }
 details.acc summary::after {
@@ -88,106 +74,139 @@ color: var(--ink-sub);
 transition: transform .15s;
 }
 details.acc[open] summary::after { transform: rotate(180deg); }
-details.acc.others-acc summary { color: var(--ink-sub); }
-.acc-body { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.acc-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; }
 
-/* ---- レコードカード（閲覧用） ---- */
+/* ---- 日ブロック(当日/翌日 表示エリア) ---- */
+.day-block { display: flex; flex-direction: column; gap: 5px; }
+.day-heading-row {
+display: flex; align-items: center; justify-content: space-between; gap: 6px;
+padding: 0 2px;
+}
+.day-heading-text {
+font-size: 12px; font-weight: 700; color: var(--ink);
+display: flex; align-items: center; gap: 5px;
+white-space: nowrap;
+}
+.day-heading-text .tag {
+font-size: 10px; font-weight: 700; padding: 1px 6px;
+border-radius: 20px; background: var(--line); color: var(--ink-sub);
+}
+.day-block.tomorrow .day-heading-text .tag { background: var(--ink); color: #fff; }
+
+.tab-controls { display: flex; align-items: center; gap: 4px; }
+.tab-btn {
+font-size: 11px; font-weight: 700; padding: 4px 10px;
+border-radius: 20px; border: 1px solid var(--line);
+background: var(--surface); color: var(--ink-sub);
+cursor: pointer; transition: all .12s;
+}
+.tab-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.toggle-all-btn {
+font-size: 13px; padding: 3px 6px; border-radius: 8px;
+border: 1px solid var(--line); background: var(--surface);
+cursor: pointer; line-height: 1;
+}
+
+.acc-panel { display: none; background: var(--surface); border: 0.5px solid var(--line); border-radius: 8px; padding: 8px 9px; }
+.acc-panel.open { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---- レコードカード ---- */
 .rec-card {
-background: var(--surface);
-border-radius: 8px;
-padding: 9px 10px;
+background: var(--bg);
+border-radius: 7px;
+padding: 8px 9px;
 border: 0.5px solid var(--line);
 }
 .rec-card .rec-name {
-font-size: 13px; font-weight: 700; color: var(--ink);
+font-size: 12.5px; font-weight: 700; color: var(--ink);
 margin-bottom: 4px;
 display: flex; align-items: center; justify-content: space-between;
 gap: 8px;
 }
 .status-badge {
-font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 20px;
 white-space: nowrap;
 }
 .status-ok    { background: #e1f8f5; color: var(--ok); }
-.status-wait  { background: #f0f0f0; color: var(--ink-sub); }
+.status-wait  { background: #eaeaea; color: var(--ink-sub); }
 .status-alert { background: #fdeaea; color: var(--ng); }
 .rec-grid {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 3px 10px;
-font-size: 12px;
+gap: 2px 8px;
+font-size: 11px;
 color: var(--ink-sub);
 }
 .rec-grid .k { font-weight: 600; color: var(--ink-sub); }
 .rec-grid .v { color: var(--ink); font-weight: 600; }
 .rec-empty {
-font-size: 13px; color: var(--ink-sub);
-text-align: center; padding: 12px 0;
+font-size: 12px; color: var(--ink-sub);
+text-align: center; padding: 10px 0;
 }
 
-/* ---- 編集フォーム（明日・自分） ---- */
+/* ---- フォーム(翌日入力) ---- */
 .card-title {
-font-size: 11px; font-weight: 700;
-letter-spacing: .1em; text-transform: uppercase;
-color: var(--ink-sub); margin-bottom: 10px;
+font-size: 10.5px; font-weight: 700;
+letter-spacing: .08em; text-transform: uppercase;
+color: var(--ink-sub); margin: 4px 0 2px;
 }
-.field { margin-bottom: 10px; }
+.field { margin-bottom: 8px; }
 .field:last-child { margin-bottom: 0; }
 label {
-display: block; font-size: 13px; font-weight: 600;
-color: var(--ink-sub); margin-bottom: 5px;
+display: block; font-size: 12px; font-weight: 600;
+color: var(--ink-sub); margin-bottom: 4px;
 }
-label .req { color: var(--ng); margin-left: 3px; }
-.inline-label { display: flex; align-items: baseline; gap: 6px; margin-bottom: 5px; }
-.inline-label .main-lbl { font-size: 13px; font-weight: 600; color: var(--ink-sub); white-space: nowrap; }
-.inline-label .sub-lbl { font-size: 11px; color: var(--ink-sub); line-height: 1.3; }
+label .req { color: var(--ng); margin-left: 2px; }
+.inline-label { display: flex; align-items: baseline; gap: 5px; margin-bottom: 4px; }
+.inline-label .main-lbl { font-size: 12px; font-weight: 600; color: var(--ink-sub); white-space: nowrap; }
+.inline-label .sub-lbl { font-size: 10.5px; color: var(--ink-sub); line-height: 1.3; }
 
-input[type="date"], input[type="time"], input[type="text"] {
-width: 100%; padding: 11px 12px;
-border: 1.2px solid var(--line); border-radius: 8px;
-font-size: 15px; font-family: inherit; color: var(--ink);
+input[type="time"], input[type="text"] {
+width: 100%; padding: 9px 10px;
+border: 1.2px solid var(--line); border-radius: 7px;
+font-size: 14px; font-family: inherit; color: var(--ink);
 background: var(--surface); appearance: none; -webkit-appearance: none;
 transition: border-color .15s; outline: none;
 }
 input:focus { border-color: var(--accent); }
 
-.section-divider { border: none; border-top: 1px solid var(--line); margin: 10px 0; }
+.section-divider { border: none; border-top: 1px solid var(--line); margin: 8px 0; }
 
-.radio-group { display: flex; gap: 7px; }
+.radio-group { display: flex; gap: 6px; }
 .radio-btn { flex: 1; position: relative; }
 .radio-btn input { position: absolute; opacity: 0; width: 0; height: 0; }
 .radio-btn label {
 display: flex; align-items: center; justify-content: center;
-padding: 10px 4px; border: 1.2px solid var(--line); border-radius: 8px;
-font-size: 13px; font-weight: 600; color: var(--ink-sub);
+padding: 8px 4px; border: 1.2px solid var(--line); border-radius: 7px;
+font-size: 12px; font-weight: 600; color: var(--ink-sub);
 cursor: pointer; transition: all .15s; margin: 0; background: var(--surface);
 }
 .radio-btn input:checked + label { border-color: var(--ink); background: var(--ink); color: #fff; }
 
-.cond-field { display: none; margin-top: 10px; }
+.cond-field { display: none; margin-top: 8px; }
 .cond-field.visible { display: block; }
 
-.field-error { font-size: 11px; color: var(--ng); margin-top: 4px; display: none; }
+.field-error { font-size: 10.5px; color: var(--ng); margin-top: 3px; display: none; }
 .field-error.visible { display: block; }
 input.has-error { border-color: var(--ng); }
 
 #globalError {
-display: none; background: #fdeaea; border: 1.2px solid var(--ng); border-radius: 8px;
-padding: 10px 12px; font-size: 13px; color: var(--ng); font-weight: 600; margin-bottom: 10px;
+display: none; background: #fdeaea; border: 1.2px solid var(--ng); border-radius: 7px;
+padding: 8px 10px; font-size: 12px; color: var(--ng); font-weight: 600; margin-bottom: 8px;
 }
 #globalError.visible { display: block; }
 
 #toast {
-display: none; background: #eef7f6; border: 1.2px solid var(--ok); border-radius: 8px;
-padding: 9px 12px; font-size: 12px; color: #1a8f83; font-weight: 700; margin-bottom: 10px;
+display: none; background: #eef7f6; border: 1.2px solid var(--ok); border-radius: 7px;
+padding: 7px 10px; font-size: 11px; color: #1a8f83; font-weight: 700; margin-bottom: 8px;
 text-align: center;
 }
 #toast.visible { display: block; }
 
 #submitBtn {
-width: 100%; padding: 13px; background: var(--accent); color: #fff;
-border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
-font-family: inherit; letter-spacing: .04em; cursor: pointer;
+width: 100%; padding: 11px; background: var(--accent); color: #fff;
+border: none; border-radius: 7px; font-size: 13px; font-weight: 700;
+font-family: inherit; letter-spacing: .03em; cursor: pointer;
 transition: background .15s, opacity .15s; margin-top: 2px;
 }
 #submitBtn:active { background: var(--accent-dk); }
@@ -196,16 +215,16 @@ transition: background .15s, opacity .15s; margin-top: 2px;
 #loadingScreen {
 position: fixed; inset: 0; background: var(--bg);
 display: flex; align-items: center; justify-content: center;
-z-index: 100; flex-direction: column; gap: 16px;
+z-index: 100; flex-direction: column; gap: 14px;
 }
 #loadingScreen.hidden { display: none; }
 .spinner {
-width: 36px; height: 36px;
+width: 32px; height: 32px;
 border: 3px solid var(--line); border-top-color: var(--accent);
 border-radius: 50%; animation: spin .7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { font-size: 15px; color: var(--ink-sub); }
+.loading-text { font-size: 13px; color: var(--ink-sub); }
 </style>
 </head>
 <body>
@@ -221,27 +240,9 @@ border-radius: 50%; animation: spin .7s linear infinite;
 <span id="loginName">読み込み中…</span>
 </div>
 
-<!-- ===== 当日ブロック ===== -->
-<div class="day-block" id="blockToday">
-<div class="day-heading"><span id="todayDateLabel">--/--</span> 勤務分<span class="tag">当日・閲覧のみ</span></div>
-
-<details class="acc self-acc" open>
-<summary>自分の情報</summary>
-<div class="acc-body" id="selfTodayBody"><div class="rec-empty">読み込み中…</div></div>
-</details>
-
-<details class="acc others-acc">
-<summary>他人の情報</summary>
-<div class="acc-body" id="othersTodayBody"><div class="rec-empty">読み込み中…</div></div>
-</details>
-</div>
-
-<!-- ===== 翌日ブロック ===== -->
-<div class="day-block tomorrow" id="blockTomorrow">
-<div class="day-heading">✨ <span id="tomorrowDateLabel">--/--</span> 勤務分<span class="tag">翌日・編集可能</span></div>
-
-<details class="acc self-acc" open>
-<summary>自分の情報（編集可）</summary>
+<!-- ===== 翌日 入力・編集(ログイン直下) ===== -->
+<details class="acc" id="tomorrowInputAcc" open>
+<summary>✨ <span id="tomorrowInputDateLabel">--/--</span> 入力・編集</summary>
 <div class="acc-body">
 <div id="toast">送信しました！</div>
 <div id="globalError">入力に不備があります。確認してください。</div>
@@ -253,7 +254,6 @@ border-radius: 50%; animation: spin .7s linear infinite;
 </div>
 
 <hr class="section-divider">
-<div class="card-title">出発・移動・到着</div>
 
 <div class="field">
 <div class="inline-label">
@@ -290,7 +290,7 @@ border-radius: 50%; animation: spin .7s linear infinite;
 <div class="cond-field" id="cond-pick">
 <label for="transportTimePick">集合時間</label>
 <input type="time" id="transportTimePick">
-<label for="pickupPlace" style="margin-top:12px">ピック場所</label>
+<label for="pickupPlace" style="margin-top:8px">ピック場所</label>
 <input type="text" id="pickupPlace" placeholder="例）大阪駅桜橋口">
 </div>
 </div>
@@ -308,10 +308,40 @@ border-radius: 50%; animation: spin .7s linear infinite;
 </div>
 </details>
 
-<details class="acc others-acc">
-<summary>他人の情報</summary>
-<div class="acc-body" id="othersTomorrowBody"><div class="rec-empty">読み込み中…</div></div>
-</details>
+<!-- ===== 当日ブロック(表示のみ) ===== -->
+<div class="day-block" id="blockToday">
+<div class="day-heading-row">
+<span class="day-heading-text"><span id="todayDateLabel">--/--</span> 勤務分<span class="tag">当日</span></span>
+<div class="tab-controls">
+<button class="tab-btn active" data-panel="selfTodayPanel">自分</button>
+<button class="tab-btn" data-panel="othersTodayPanel">他人</button>
+<button class="toggle-all-btn" data-group="today" title="全開閉">🔃</button>
+</div>
+</div>
+<div class="acc-panel open" id="selfTodayPanel">
+<div id="selfTodayBody"><div class="rec-empty">読み込み中…</div></div>
+</div>
+<div class="acc-panel" id="othersTodayPanel">
+<div id="othersTodayBody"><div class="rec-empty">読み込み中…</div></div>
+</div>
+</div>
+
+<!-- ===== 翌日ブロック(表示のみ) ===== -->
+<div class="day-block tomorrow" id="blockTomorrow">
+<div class="day-heading-row">
+<span class="day-heading-text">✨ <span id="tomorrowDateLabel">--/--</span> 勤務分<span class="tag">翌日</span></span>
+<div class="tab-controls">
+<button class="tab-btn active" data-panel="selfTomorrowPanel">自分</button>
+<button class="tab-btn" data-panel="othersTomorrowPanel">他人</button>
+<button class="toggle-all-btn" data-group="tomorrow" title="全開閉">🔃</button>
+</div>
+</div>
+<div class="acc-panel open" id="selfTomorrowPanel">
+<div id="selfTomorrowBody"><div class="rec-empty">読み込み中…</div></div>
+</div>
+<div class="acc-panel" id="othersTomorrowPanel">
+<div id="othersTomorrowBody"><div class="rec-empty">読み込み中…</div></div>
+</div>
 </div>
 
 </main>
@@ -349,9 +379,32 @@ const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 tomorrowWorkDate = tomorrow.toISOString().slice(0, 10);
 
+setupTabControls();
 await loadView();
 loadingScreen.classList.add('hidden');
 })();
+
+// ---- タブ / 全開閉ボタンの初期化 ----
+function setupTabControls() {
+document.querySelectorAll('.tab-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+const panel = $(btn.dataset.panel);
+const willOpen = !panel.classList.contains('open');
+panel.classList.toggle('open', willOpen);
+btn.classList.toggle('active', willOpen);
+});
+});
+document.querySelectorAll('.toggle-all-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+const group = btn.dataset.group; // 'today' or 'tomorrow'
+const panels = document.querySelectorAll(`#block${group === 'today' ? 'Today' : 'Tomorrow'} .acc-panel`);
+const tabs   = document.querySelectorAll(`#block${group === 'today' ? 'Today' : 'Tomorrow'} .tab-btn`);
+const allOpen = Array.from(panels).every(p => p.classList.contains('open'));
+panels.forEach(p => p.classList.toggle('open', !allOpen));
+tabs.forEach(t => t.classList.toggle('active', !allOpen));
+});
+});
+}
 
 // ---- データ取得＆描画 ----
 async function loadView() {
@@ -362,17 +415,17 @@ if (data.status !== 'ok') {
 console.error('view取得エラー', data);
 return;
 }
-renderDay(data.today, {
-dateLabelId: 'todayDateLabel',
-selfBodyId: 'selfTodayBody',
-othersBodyId: 'othersTodayBody',
-editable: false,
-});
-renderDay(data.tomorrow, {
-dateLabelId: 'tomorrowDateLabel',
-othersBodyId: 'othersTomorrowBody',
-editable: true,
-});
+
+$('todayDateLabel').textContent = fmtDateLabel(data.today.date);
+$('tomorrowDateLabel').textContent = fmtDateLabel(data.tomorrow.date);
+$('tomorrowInputDateLabel').textContent = fmtDateLabel(data.tomorrow.date);
+
+renderSelf('selfTodayBody', data.today.self);
+renderOthers('othersTodayBody', data.today.others);
+renderSelf('selfTomorrowBody', data.tomorrow.self);
+renderOthers('othersTomorrowBody', data.tomorrow.others);
+
+prefillTomorrowForm(data.tomorrow.self);
 } catch(err) {
 console.error('loadViewエラー', err);
 }
@@ -416,29 +469,22 @@ ${opts.showName === false ? '' : `<span class="k">施策名</span><span class="v
 </div>`;
 }
 
-function renderDay(dayData, cfg) {
-if (cfg.dateLabelId) $(cfg.dateLabelId).textContent = fmtDateLabel(dayData.date);
-
-// 自分の情報（当日=閲覧のみ／翌日=編集フォームへ反映）
-if (cfg.editable) {
-prefillTomorrowForm(dayData.self);
-} else if (cfg.selfBodyId) {
-const body = $(cfg.selfBodyId);
-body.innerHTML = dayData.self
-? recordCardHtml(dayData.self, { showName: false })
-: '<div class="rec-empty">本日分のデータがありません</div>';
+function renderSelf(bodyId, self) {
+$(bodyId).innerHTML = self
+? recordCardHtml(self, { showName: false })
+: '<div class="rec-empty">データがありません</div>';
 }
 
-// 他人の情報
-const othersBody = $(cfg.othersBodyId);
-if (!dayData.others || dayData.others.length === 0) {
-othersBody.innerHTML = '<div class="rec-empty">他のスタッフの情報はありません</div>';
+function renderOthers(bodyId, others) {
+const body = $(bodyId);
+if (!others || others.length === 0) {
+body.innerHTML = '<div class="rec-empty">他のスタッフの情報はありません</div>';
 } else {
-othersBody.innerHTML = dayData.others.map(r => recordCardHtml(r)).join('');
+body.innerHTML = others.map(r => recordCardHtml(r)).join('');
 }
 }
 
-// ---- 翌日・自分の編集フォームへ既存データを反映 ----
+// ---- 翌日・入力フォームへ既存データを反映(既に送信済みならそれを表示) ----
 function prefillTomorrowForm(self) {
 if (!self) return;
 $('workPlace').value = self.event || '';
@@ -458,7 +504,7 @@ $('tr-none').checked = true;
 updateCondFields();
 }
 
-// ---- フォーム制御（既存ロジック踏襲） ----
+// ---- フォーム制御 ----
 document.querySelectorAll('input[name="transportType"]').forEach(r => {
 r.addEventListener('change', updateCondFields);
 });
