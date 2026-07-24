@@ -18,6 +18,7 @@
 --accent-dk: #5570e0;
 --ok:        #2ec4b6;
 --ng:        #e63946;
+--warn:      #f4a521;
 --radius:    14px;
 }
 
@@ -47,7 +48,7 @@ margin-bottom: 4px;
 }
 .header-title { font-size: 22px; font-weight: 700; letter-spacing: .03em; }
 
-main { padding: 14px 12px 48px; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+main { padding: 14px 12px 48px; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
 
 .login-badge {
 background: #eef1ff;
@@ -62,48 +63,103 @@ font-weight: 600;
 color: var(--accent);
 }
 
-.card {
+/* ---- 日ブロック ---- */
+.day-block { display: flex; flex-direction: column; gap: 8px; }
+.day-heading {
+font-size: 15px; font-weight: 700; color: var(--ink);
+display: flex; align-items: center; gap: 6px;
+padding-left: 2px;
+}
+.day-heading .tag {
+font-size: 12px; font-weight: 700; padding: 2px 8px;
+border-radius: 20px; background: var(--line); color: var(--ink-sub);
+}
+.day-block.tomorrow .day-heading .tag { background: #fff2d6; color: #9a6b00; }
+
+/* ---- アコーディオン ---- */
+details.acc {
 background: var(--surface);
 border-radius: var(--radius);
 border: 0.5px solid var(--line);
-padding: 16px 14px;
+overflow: hidden;
 }
+details.acc + details.acc { margin-top: 8px; }
+details.acc summary {
+list-style: none;
+cursor: pointer;
+padding: 14px 16px;
+font-size: 14px;
+font-weight: 700;
+letter-spacing: .06em;
+color: var(--accent);
+display: flex;
+align-items: center;
+justify-content: space-between;
+user-select: none;
+}
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after {
+content: '▾';
+font-size: 12px;
+color: var(--ink-sub);
+transition: transform .15s;
+}
+details.acc[open] summary::after { transform: rotate(180deg); }
+details.acc.others-acc summary { color: var(--ink-sub); }
+.acc-body { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+
+/* ---- レコードカード（閲覧用） ---- */
+.rec-card {
+background: var(--bg);
+border-radius: 10px;
+padding: 12px 13px;
+border: 0.5px solid var(--line);
+}
+.rec-card .rec-name {
+font-size: 15px; font-weight: 700; color: var(--ink);
+margin-bottom: 6px;
+display: flex; align-items: center; justify-content: space-between;
+gap: 8px;
+}
+.status-badge {
+font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 20px;
+white-space: nowrap;
+}
+.status-ok    { background: #e1f8f5; color: var(--ok); }
+.status-wait  { background: #ffece0; color: #c76a2b; }
+.status-alert { background: #fff0d2; color: #a5710a; }
+.rec-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 6px 12px;
+font-size: 13px;
+color: var(--ink-sub);
+}
+.rec-grid .k { font-weight: 600; color: var(--ink-sub); }
+.rec-grid .v { color: var(--ink); font-weight: 600; }
+.rec-empty {
+font-size: 14px; color: var(--ink-sub);
+text-align: center; padding: 18px 0;
+}
+
+/* ---- 編集フォーム（明日・自分） ---- */
 .card-title {
 font-size: 12px; font-weight: 700;
 letter-spacing: .12em; text-transform: uppercase;
 color: var(--accent); margin-bottom: 14px;
 }
-
 .field { margin-bottom: 16px; }
 .field:last-child { margin-bottom: 0; }
-
 label {
 display: block; font-size: 15px; font-weight: 600;
 color: var(--ink-sub); margin-bottom: 8px;
 }
 label .req { color: var(--ng); margin-left: 3px; }
+.inline-label { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.inline-label .main-lbl { font-size: 15px; font-weight: 600; color: var(--ink-sub); white-space: nowrap; }
+.inline-label .sub-lbl { font-size: 13px; color: var(--accent); line-height: 1.4; }
 
-.inline-label {
-display: flex;
-align-items: baseline;
-gap: 8px;
-margin-bottom: 8px;
-}
-.inline-label .main-lbl {
-font-size: 15px;
-font-weight: 600;
-color: var(--ink-sub);
-white-space: nowrap;
-}
-.inline-label .sub-lbl {
-font-size: 13px;
-color: var(--accent);
-line-height: 1.4;
-}
-
-input[type="date"],
-input[type="time"],
-input[type="text"] {
+input[type="date"], input[type="time"], input[type="text"] {
 width: 100%; padding: 16px 14px;
 border: 1.5px solid var(--line); border-radius: 10px;
 font-size: 18px; font-family: inherit; color: var(--ink);
@@ -111,13 +167,8 @@ background: var(--surface); appearance: none; -webkit-appearance: none;
 transition: border-color .15s; outline: none;
 }
 input:focus { border-color: var(--accent); }
-input::placeholder { color: #b0b0c8; }
 
-.section-divider {
-border: none;
-border-top: 1px solid var(--line);
-margin: 16px 0;
-}
+.section-divider { border: none; border-top: 1px solid var(--line); margin: 16px 0; }
 
 .radio-group { display: flex; gap: 10px; }
 .radio-btn { flex: 1; position: relative; }
@@ -128,9 +179,7 @@ padding: 15px 6px; border: 1.5px solid var(--line); border-radius: 10px;
 font-size: 16px; font-weight: 600; color: var(--ink-sub);
 cursor: pointer; transition: all .15s; margin: 0; background: var(--surface);
 }
-.radio-btn input:checked + label {
-border-color: var(--accent); background: #f0f3ff; color: var(--accent);
-}
+.radio-btn input:checked + label { border-color: var(--accent); background: #f0f3ff; color: var(--accent); }
 
 .cond-field { display: none; margin-top: 16px; }
 .cond-field.visible { display: block; }
@@ -140,36 +189,26 @@ border-color: var(--accent); background: #f0f3ff; color: var(--accent);
 input.has-error { border-color: var(--ng); }
 
 #globalError {
-display: none; background: #fff0f1;
-border: 1.5px solid var(--ng); border-radius: 10px;
-padding: 14px 16px; font-size: 15px;
-color: var(--ng); font-weight: 600;
+display: none; background: #fff0f1; border: 1.5px solid var(--ng); border-radius: 10px;
+padding: 14px 16px; font-size: 15px; color: var(--ng); font-weight: 600; margin-bottom: 12px;
 }
 #globalError.visible { display: block; }
 
+#toast {
+display: none; background: #e1f8f5; border: 1.5px solid var(--ok); border-radius: 10px;
+padding: 12px 16px; font-size: 14px; color: #1a8f83; font-weight: 700; margin-bottom: 12px;
+text-align: center;
+}
+#toast.visible { display: block; }
+
 #submitBtn {
-width: 100%; padding: 20px; background: var(--accent); color: #fff;
-border: none; border-radius: var(--radius); font-size: 19px; font-weight: 700;
+width: 100%; padding: 18px; background: var(--accent); color: #fff;
+border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700;
 font-family: inherit; letter-spacing: .05em; cursor: pointer;
-transition: background .15s, opacity .15s;
+transition: background .15s, opacity .15s; margin-top: 4px;
 }
 #submitBtn:active { background: var(--accent-dk); }
 #submitBtn:disabled { opacity: .55; cursor: not-allowed; }
-
-#successScreen {
-display: none; flex-direction: column; align-items: center;
-justify-content: center; min-height: 70vh;
-text-align: center; padding: 32px 24px;
-}
-#successScreen.visible { display: flex; }
-.success-icon {
-width: 88px; height: 88px; background: var(--ok);
-border-radius: 50%; display: flex; align-items: center;
-justify-content: center; margin-bottom: 28px;
-}
-.success-icon svg { width: 44px; height: 44px; }
-.success-title { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
-.success-sub { font-size: 16px; color: var(--ink-sub); line-height: 1.8; }
 
 #loadingScreen {
 position: fixed; inset: 0; background: var(--bg);
@@ -193,38 +232,41 @@ border-radius: 50%; animation: spin .7s linear infinite;
 <div class="loading-text">読み込み中…</div>
 </div>
 
-<div id="successScreen">
-<div class="success-icon">
-<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-<polyline points="20 6 9 17 4 12"/>
-</svg>
-</div>
-<div class="success-title">送信完了しました</div>
-<div class="success-sub">前日確認の送信が完了しました。<br>明日もよろしくお願いします！</div>
-</div>
-
-<div id="formWrap">
 <header class="header">
 <div class="header-label">Event Staff</div>
 <div class="header-title">前日確認</div>
 </header>
 
 <main>
-<div id="globalError">入力に不備があります。確認してください。</div>
-
 <div class="login-badge">
 <span>👤</span>
 <span id="loginName">読み込み中…</span>
 </div>
 
-<div class="card">
-<div class="card-title">勤務情報</div>
+<!-- ===== 当日ブロック ===== -->
+<div class="day-block" id="blockToday">
+<div class="day-heading"><span id="todayDateLabel">--/--</span> 勤務分<span class="tag">当日・閲覧のみ</span></div>
 
-<div class="field">
-<label for="workDate">勤務日<span class="req">*</span></label>
-<input type="date" id="workDate" required>
-<div class="field-error" id="err-workDate">勤務日を選択してください</div>
+<details class="acc self-acc" open>
+<summary>自分の情報</summary>
+<div class="acc-body" id="selfTodayBody"><div class="rec-empty">読み込み中…</div></div>
+</details>
+
+<details class="acc others-acc">
+<summary>他人の情報</summary>
+<div class="acc-body" id="othersTodayBody"><div class="rec-empty">読み込み中…</div></div>
+</details>
 </div>
+
+<!-- ===== 翌日ブロック ===== -->
+<div class="day-block tomorrow" id="blockTomorrow">
+<div class="day-heading">✨ <span id="tomorrowDateLabel">--/--</span> 勤務分<span class="tag">翌日・編集可能</span></div>
+
+<details class="acc self-acc" open>
+<summary>自分の情報（編集可）</summary>
+<div class="acc-body">
+<div id="toast">送信しました！</div>
+<div id="globalError">入力に不備があります。確認してください。</div>
 
 <div class="field">
 <label for="workPlace">勤務場所<span class="req">*</span></label>
@@ -283,11 +325,18 @@ border-radius: 50%; animation: spin .7s linear infinite;
 <input type="time" id="arrivalTime" required>
 <div class="field-error" id="err-arrivalTime">入力してください</div>
 </div>
-</div>
 
 <button id="submitBtn" type="button">送信する</button>
-</main>
 </div>
+</details>
+
+<details class="acc others-acc">
+<summary>他人の情報</summary>
+<div class="acc-body" id="othersTomorrowBody"><div class="rec-empty">読み込み中…</div></div>
+</details>
+</div>
+
+</main>
 
 <script>
 const LIFF_ID = '2010311386-sSwMJRkO';
@@ -296,13 +345,13 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycby526aLBiPtUEuNll856wQv
 let lineUserId  = '';
 let displayName = '';
 let isSubmitting = false;
+let tomorrowWorkDate = '';
 
 const $ = id => document.getElementById(id);
 const loadingScreen = $('loadingScreen');
-const successScreen = $('successScreen');
-const formWrap      = $('formWrap');
 const submitBtn     = $('submitBtn');
 const globalError   = $('globalError');
+const toast         = $('toast');
 
 (async () => {
 try {
@@ -317,12 +366,121 @@ lineUserId  = 'debug_user';
 displayName = 'デバッグユーザー';
 }
 $('loginName').textContent = displayName + ' としてログイン中';
+
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
-$('workDate').value = tomorrow.toISOString().slice(0, 10);
+tomorrowWorkDate = tomorrow.toISOString().slice(0, 10);
+
+await loadView();
 loadingScreen.classList.add('hidden');
 })();
 
+// ---- データ取得＆描画 ----
+async function loadView() {
+try {
+const res  = await fetch(`${GAS_URL}?mode=view&uid=${encodeURIComponent(lineUserId)}`);
+const data = await res.json();
+if (data.status !== 'ok') {
+console.error('view取得エラー', data);
+return;
+}
+renderDay(data.today, {
+dateLabelId: 'todayDateLabel',
+selfBodyId: 'selfTodayBody',
+othersBodyId: 'othersTodayBody',
+editable: false,
+});
+renderDay(data.tomorrow, {
+dateLabelId: 'tomorrowDateLabel',
+othersBodyId: 'othersTomorrowBody',
+editable: true,
+});
+} catch(err) {
+console.error('loadViewエラー', err);
+}
+}
+
+function fmtDateLabel(dateStr) {
+if (!dateStr) return '--/--';
+const d = new Date(dateStr + 'T00:00:00+09:00');
+const w = ['日','月','火','水','木','金','土'][d.getDay()];
+return `${d.getMonth()+1}/${d.getDate()}(${w})`;
+}
+
+function statusClass(disp) {
+if (!disp) return 'status-wait';
+if (disp.indexOf('出発済') >= 0) return 'status-ok';
+if (disp.indexOf('要確認') >= 0) return 'status-alert';
+return 'status-wait';
+}
+
+function transportLabel(r) {
+if (r.transport === '電車') return `🚃 電車${r.transportTime ? '（'+r.transportTime+'）' : ''}`;
+if (r.transport === 'ピック') return `🚗 ピック${r.pickup ? '（'+r.pickup+'）' : ''}`;
+return '— なし';
+}
+
+function recordCardHtml(r, opts) {
+opts = opts || {};
+const badge = (typeof r.dispStatus !== 'undefined')
+? `<span class="status-badge ${statusClass(r.dispStatus)}">${r.dispStatus}</span>`
+: '';
+return `
+<div class="rec-card">
+<div class="rec-name"><span>${opts.showName === false ? (r.event || '') : (r.name || '')}</span>${badge}</div>
+<div class="rec-grid">
+${opts.showName === false ? '' : `<span class="k">施策名</span><span class="v">${r.event || '-'}</span>`}
+<span class="k">集合時間</span><span class="v">${r.meetTime || '-'}</span>
+<span class="k">出発予定</span><span class="v">${r.departTime || '-'}</span>
+<span class="k">到着予定</span><span class="v">${r.arriveTime || '-'}</span>
+<span class="k">移動区分</span><span class="v">${transportLabel(r)}</span>
+</div>
+</div>`;
+}
+
+function renderDay(dayData, cfg) {
+if (cfg.dateLabelId) $(cfg.dateLabelId).textContent = fmtDateLabel(dayData.date);
+
+// 自分の情報（当日=閲覧のみ／翌日=編集フォームへ反映）
+if (cfg.editable) {
+prefillTomorrowForm(dayData.self);
+} else if (cfg.selfBodyId) {
+const body = $(cfg.selfBodyId);
+body.innerHTML = dayData.self
+? recordCardHtml(dayData.self, { showName: false })
+: '<div class="rec-empty">本日分のデータがありません</div>';
+}
+
+// 他人の情報
+const othersBody = $(cfg.othersBodyId);
+if (!dayData.others || dayData.others.length === 0) {
+othersBody.innerHTML = '<div class="rec-empty">他のスタッフの情報はありません</div>';
+} else {
+othersBody.innerHTML = dayData.others.map(r => recordCardHtml(r)).join('');
+}
+}
+
+// ---- 翌日・自分の編集フォームへ既存データを反映 ----
+function prefillTomorrowForm(self) {
+if (!self) return;
+$('workPlace').value = self.event || '';
+$('departureTime').value = self.departTime || '';
+$('arrivalTime').value = self.arriveTime || '';
+
+if (self.transport === '電車') {
+$('tr-train').checked = true;
+$('transportTime').value = self.transportTime || '';
+} else if (self.transport === 'ピック') {
+$('tr-pick').checked = true;
+$('transportTimePick').value = self.transportTime || '';
+$('pickupPlace').value = self.pickup || '';
+} else if (self.transport === 'なし') {
+$('tr-none').checked = true;
+}
+updateCondFields();
+}
+
+// ---- フォーム制御（既存ロジック踏襲） ----
 document.querySelectorAll('input[name="transportType"]').forEach(r => {
 r.addEventListener('change', updateCondFields);
 });
@@ -353,7 +511,6 @@ return '';
 function validate() {
 let ok = true;
 [
-{ id: 'workDate',      errId: 'err-workDate',      check: v => v !== '' },
 { id: 'workPlace',     errId: 'err-workPlace',     check: v => v.trim() !== '' },
 { id: 'departureTime', errId: 'err-departureTime', check: v => v !== '' },
 { id: 'arrivalTime',   errId: 'err-arrivalTime',   check: v => v !== '' },
@@ -373,10 +530,10 @@ return ok;
 submitBtn.addEventListener('click', async () => {
 if (isSubmitting) return;
 globalError.classList.remove('visible');
+toast.classList.remove('visible');
 
 if (!validate()) {
 globalError.classList.add('visible');
-window.scrollTo({ top: 0, behavior: 'smooth' });
 return;
 }
 
@@ -388,7 +545,7 @@ const payload = {
 timestamp:     new Date().toISOString(),
 lineUserId:    lineUserId,
 displayName:   displayName,
-workDate:      $('workDate').value,
+workDate:      tomorrowWorkDate,
 workPlace:     $('workPlace').value.trim(),
 departureTime: $('departureTime').value,
 arrivalTime:   $('arrivalTime').value,
@@ -404,22 +561,18 @@ redirect: 'follow',
 headers:  { 'Content-Type': 'text/plain;charset=utf-8' },
 body:     JSON.stringify(payload),
 });
-formWrap.style.display = 'none';
-successScreen.classList.add('visible');
+toast.classList.add('visible');
+await loadView();
 } catch(err) {
 console.error(err);
-showError('送信に失敗しました。再度お試しください。');
-}
-});
-
-function showError(msg) {
-globalError.textContent = msg;
+globalError.textContent = '送信に失敗しました。再度お試しください。';
 globalError.classList.add('visible');
-window.scrollTo({ top: 0, behavior: 'smooth' });
+} finally {
 isSubmitting = false;
 submitBtn.disabled = false;
 submitBtn.textContent = '送信する';
 }
+});
 </script>
 </body>
 </html>
