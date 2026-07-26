@@ -385,9 +385,21 @@ displayName = 'デバッグユーザー';
 }
 $('loginName').textContent = displayName + ' としてログイン中';
 
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-tomorrowWorkDate = tomorrow.toISOString().slice(0, 10);
+// ★修正：toISOString()はUTC基準のため、JST午前9時より前だと1日ズレる不具合があった。
+//   JSTのカレンダー日付を明示的に計算するよう変更。
+function jstDatePlusDays(n) {
+const now = new Date();
+const utcMs = now.getTime() + now.getTimezoneOffset() * 60000; // 端末のローカルタイムゾーンに依存せずUTC msを算出
+const jstMs = utcMs + 9 * 60 * 60000; // JSTのwall-clockをUTC扱いのDateとして作る
+const jstDate = new Date(jstMs);
+jstDate.setUTCDate(jstDate.getUTCDate() + n);
+const y = jstDate.getUTCFullYear();
+const m = String(jstDate.getUTCMonth() + 1).padStart(2, '0');
+const d = String(jstDate.getUTCDate()).padStart(2, '0');
+return `${y}-${m}-${d}`;
+}
+
+tomorrowWorkDate = jstDatePlusDays(1);
 
 setupTabControls();
 await loadView();
